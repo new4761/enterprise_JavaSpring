@@ -13,7 +13,8 @@
 <form action="<%= request.getContextPath() %>/StudentServlet" method="post">
     First Name: <input type="text" name="firstName">
     <br> <br>
-
+    ${testservice.getReport().getConfirmed()}
+    <br> <br>
     Last Name: <input type="text" name="lastName">
     <br> <br>
 
