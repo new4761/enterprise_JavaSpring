@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<!-- For teaching Only -->
+< %@ page language="java" contentType="text/html; charset=ISO-8859-1"
+pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +14,7 @@
 <form action="<%= request.getContextPath() %>/StudentServlet" method="post">
     First Name: <input type="text" name="firstName">
     <br> <br>
-    ${testservice.getReport().getConfirmed()}
+    ${testservice.getReport().getNewDeaths()}
     <br> <br>
     Last Name: <input type="text" name="lastName">
     <br> <br>

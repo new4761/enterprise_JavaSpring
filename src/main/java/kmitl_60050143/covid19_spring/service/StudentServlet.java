@@ -16,7 +16,7 @@ public class StudentServlet extends HttpServlet {
     private static final long serialVersionUID = 1;
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String firstName = req.getParameter("firstName");
         String lastName = req.getParameter("lastName");

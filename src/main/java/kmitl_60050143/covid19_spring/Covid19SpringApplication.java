@@ -8,11 +8,11 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.context.annotation.SessionScope;
 
+
+//Servlet scan For teaching Only not using
 @ServletComponentScan
 @SpringBootApplication
-
 public class Covid19SpringApplication extends SpringBootServletInitializer {
     @Override
     protected SpringApplicationBuilder configure (SpringApplicationBuilder application) {
@@ -21,9 +21,9 @@ public class Covid19SpringApplication extends SpringBootServletInitializer {
 
     public static void main (String[] args) {
         SpringApplication.run(Covid19SpringApplication.class, args);
-
     }
 
+    // use Bean RestTemplate module
     @Bean
     public RestTemplate restTemplate (RestTemplateBuilder builder) {
         return builder.build();
