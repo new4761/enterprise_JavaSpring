@@ -12,13 +12,10 @@ import org.springframework.web.client.RestTemplate;
 
 
 //Servlet scan For teaching Only not using
-@ServletComponentScan
+
 @SpringBootApplication
-public class Covid19SpringApplication extends SpringBootServletInitializer {
-    @Override
-    protected SpringApplicationBuilder configure (SpringApplicationBuilder application) {
-        return application.sources(Covid19SpringApplication.class);
-    }
+public class Covid19SpringApplication  {
+
 
     public static void main (String[] args) {
         SpringApplication.run(Covid19SpringApplication.class, args);
