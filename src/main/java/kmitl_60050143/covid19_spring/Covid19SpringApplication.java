@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 
+
 //Servlet scan For teaching Only not using
 @ServletComponentScan
 @SpringBootApplication
