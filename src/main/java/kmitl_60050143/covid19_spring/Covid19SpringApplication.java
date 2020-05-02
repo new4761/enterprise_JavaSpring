@@ -2,10 +2,8 @@ package kmitl_60050143.covid19_spring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.boot.web.servlet.ServletComponentScan;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
@@ -13,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 //Servlet scan For teaching Only not using
 
-@SpringBootApplication
+@SpringBootApplication(exclude = SecurityAutoConfiguration.class )
 public class Covid19SpringApplication  {
 
 

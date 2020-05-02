@@ -23,7 +23,7 @@ public class AuthConfig extends WebSecurityConfigurerAdapter{
         http.requiresChannel()
                 .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
                 .requiresSecure();
-        http.authorizeRequests().antMatchers("/").permitAll();
+        http.csrf().disable().authorizeRequests().anyRequest().permitAll();
         }
 
 }
