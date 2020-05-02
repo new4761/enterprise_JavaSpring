@@ -14,8 +14,8 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure (HttpSecurity http) throws Exception {
-        http.csrf().disable();
-        super.configure(http);
+        http.cors().and().csrf().disable();
+      //  super.configure(http);
     }
 
     @Override

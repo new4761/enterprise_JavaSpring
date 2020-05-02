@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 //Servlet scan For teaching Only not using
 
-@SpringBootApplication(exclude = SecurityAutoConfiguration.class )
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class} )
 public class Covid19SpringApplication  {
 
 
