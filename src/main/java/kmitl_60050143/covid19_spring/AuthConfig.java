@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-
+// for handle 403 error
 @Configuration
 @EnableWebSecurity
 public class AuthConfig extends WebSecurityConfigurerAdapter {
@@ -27,10 +27,9 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
                 .ignoring()
                 .antMatchers("/**");
     }
+    // for handle 403 error auto auth by default
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("username").password("yourpassword").roles("ADMIN");
+        auth.inMemoryAuthentication().withUser("username").password("yourpassword").roles("ADMIN");
     }
 }
