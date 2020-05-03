@@ -7,14 +7,13 @@ import kmitl_60050143.covid19_spring.service.Covid19CaseService;
 import kmitl_60050143.covid19_spring.service.Covid19CaseSummaryService;
 import kmitl_60050143.covid19_spring.service.Covid19DailyService;
 import kmitl_60050143.covid19_spring.service.Covid19TimelineService;
-import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
 
-
+@CrossOrigin
 // define bean to be  RestController
 @RestController
 //  Mapping path to /api/covid19
