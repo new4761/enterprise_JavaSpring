@@ -217,7 +217,7 @@ public class Covid19Controller {
     //Get CaseSummaryCaseReport only Province BySpecify name (use format ProvinceEn)  => using query parameter (name)
     @ApiOperation( value  = "Covid19 Summary data selected province by name"  )
     @GetMapping(path = "/cases/sums/province/select", produces = "application/json", params = "name")
-    public Map sumsCaseProvinceByName (@RequestParam("name") String name) {
+    public Map sumsCaseProvinceByName (@ApiParam(required = true,example = "Bangkok")@RequestParam("name") String name) {
         Map data = new HashMap<>();
         //map return value for know data meaning
         data.put(name, caseSummaryService.getCaseSummaryProvinceByName(name));

@@ -1,6 +1,7 @@
 package kmitl_60050143.covid19_spring.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
 
