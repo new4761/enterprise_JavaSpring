@@ -16,17 +16,10 @@ public class AuthConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure (HttpSecurity http) throws Exception {
-        http.httpBasic();
         http.cors().and().csrf().disable();
       //  super.configure(http);
     }
 
-    @Override
-    public void configure (WebSecurity web) throws Exception {
-        web
-                .ignoring()
-                .antMatchers("/**");
-    }
     // for handle 403 error auto auth by default
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

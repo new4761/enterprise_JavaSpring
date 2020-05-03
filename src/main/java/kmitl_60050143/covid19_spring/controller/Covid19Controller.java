@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 
 // define bean to be  RestController
@@ -85,33 +82,49 @@ public class Covid19Controller {
 
     //Get CaseReport report  by condition  => using query parameter (age,gender,province,nation)
     @GetMapping(path = "/cases/filter", produces = "application/json")
-    public List<Covid19CaseDetails> findCasesByfilter
+    public Map findCasesByfilter
     (@RequestParam(required = false, name = "age") Integer age, @RequestParam(required = false, name = "gender") String gender, @RequestParam(required = false, name = "province") String province, @RequestParam(required = false, name = "nation") String nation) {
-        return caseService.findCaseByFilter(age, gender, province, nation);
+        Map data = new HashMap<>();
+        data.put("Data",caseService.findCaseByFilter(age, gender, province, nation));
+        data.put("UpdateDate",caseService.getCaseReport().getUpdateDate());
+        return data;
     }
 
     //Get CaseReport report  by Age  between max and min)  => using query parameter (max,min)
-    @GetMapping(path = "/cases/age", produces = "application/json")
-    public List<Covid19CaseDetails> findCasesByAge (@RequestParam("max") int max, @RequestParam("min") int min) {
-        return caseService.findCaseByAge(max, min);
+    @GetMapping(path = "/cases/age/range", produces = "application/json")
+    public Map findCasesByAge (@RequestParam("max") int max, @RequestParam("min") int min) {
+        Map data = new HashMap<>();
+        data.put("Data",caseService.findCaseByAge(max, min));
+        data.put("UpdateDate",caseService.getCaseReport().getUpdateDate());
+        return data;
+
     }
 
     //Get CaseReport report  by Gender    => using query parameter (sex)
     @GetMapping(path = "/cases/gender", produces = "application/json")
-    public List<Covid19CaseDetails> findCasesByGender (@RequestParam("sex") String sex) {
-        return caseService.findCaseByGender(sex);
+    public Map findCasesByGender (@RequestParam("sex") String sex) {
+        Map data = new HashMap<>();
+        data.put("Data", caseService.findCaseByGender(sex));
+        data.put("UpdateDate",caseService.getCaseReport().getUpdateDate());
+        return data;
     }
 
     //Get CaseReport report  by Province (use format ProvinceEn) => using query parameter (name)
     @GetMapping(path = "/cases/province", produces = "application/json")
-    public List<Covid19CaseDetails> findCaseByProvince (@RequestParam("name") String name) {
-        return caseService.findCaseByProvince(name);
+    public Map findCaseByProvince (@RequestParam("name") String name) {
+        Map data = new HashMap<>();
+        data.put("Data", caseService.findCaseByProvince(name));
+        data.put("UpdateDate",caseService.getCaseReport().getUpdateDate());
+        return data;
     }
 
     //Get CaseReport report  by Nation  (use format NationEn) => using query parameter (name)
     @GetMapping(path = "/cases/nation", produces = "application/json")
-    public List<Covid19CaseDetails> findCaseByNation (@RequestParam("name") String name) {
-        return caseService.findCaseByNation(name);
+    public Map findCaseByNation (@RequestParam("name") String name) {
+        Map data = new HashMap<>();
+        data.put("Data", caseService.findCaseByNation(name));
+        data.put("UpdateDate",caseService.getCaseReport().getUpdateDate());
+        return data;
     }
 
     //************************************************
@@ -125,16 +138,19 @@ public class Covid19Controller {
 
     //Get CaseSummaryCaseReport only Gender
     @GetMapping(path = "/cases/sums/gender", produces = "application/json")
-    public Map<String, Integer> sumsCaseGender () {
-        return caseSummaryService.getCaseSummaryGender();
+    public Map sumsCaseGender () {
+        Map data = new HashMap<>();
+        data.put("Gender", caseSummaryService.getCaseSummaryGender());
+        data.put("UpdateDate",caseSummaryService.getCaseSummaryReport().getUpdateDate());
+        return data;
     }
 
     //Get CaseSummaryCaseReport only Gender BySpecify sex => using query parameter (sex)
-    @GetMapping(path = "/cases/sums/gender", produces = "application/json", params = "sex")
-    public Map<String, Integer> sumsCaseGenderBySex (@RequestParam("sex") String sex) {
-        Map<String, Integer> data = new HashMap<>();
-        //map return value for know data meaning
+    @GetMapping(path = "/cases/sums/gender/select", produces = "application/json", params = "sex")
+    public Map MapsumsCaseGenderBySex (@RequestParam("sex") String sex) {
+        Map data = new HashMap<>();
         data.put(sex, caseSummaryService.getCaseSummaryGenderBySex(sex));
+        data.put("UpdateDate",caseSummaryService.getCaseSummaryReport().getUpdateDate());
         return data;
     }
 
@@ -146,16 +162,19 @@ public class Covid19Controller {
 
     //Get CaseSummaryCaseReport only Nation
     @GetMapping(path = "/cases/sums/nation", produces = "application/json")
-    public Map<String, Integer> sumsCaseNation () {
-        return caseSummaryService.getCaseSummaryNation();
+    public Map sumsCaseNation () {
+        Map data = new HashMap<>();
+        data.put("Nation", caseSummaryService.getCaseSummaryNation());
+        data.put("UpdateDate",caseSummaryService.getCaseSummaryReport().getUpdateDate());
+        return data;
     }
 
     //Get CaseSummaryCaseReport only Nation BySpecify name (use format NationEn)  => using query parameter (name)
-    @GetMapping(path = "/cases/sums/nation", produces = "application/json", params = "name")
-    public Map<String, Integer> sumsCaseNationByName (@RequestParam("name") String name) {
-        Map<String, Integer> data = new HashMap<>();
-        //map return value for know data meaning
+    @GetMapping(path = "/cases/sums/nation/select", produces = "application/json", params = "name")
+    public Map sumsCaseNationByName (@RequestParam("name") String name) {
+        Map data = new HashMap<>();
         data.put(name, caseSummaryService.getCaseSummaryNationByName(name));
+        data.put("UpdateDate",caseSummaryService.getCaseSummaryReport().getUpdateDate());
         return data;
     }
 
@@ -167,16 +186,20 @@ public class Covid19Controller {
 
     //Get CaseSummaryCaseReport only Province
     @GetMapping(path = "/cases/sums/province", produces = "application/json")
-    public Map<String, Integer> sumsCaseProvince () {
-        return caseSummaryService.getCaseSummaryProvince();
+    public Map sumsCaseProvince () {
+        Map data = new HashMap<>();
+        data.put("Province", caseSummaryService.getCaseSummaryProvince());
+        data.put("UpdateDate",caseSummaryService.getCaseSummaryReport().getUpdateDate());
+        return data;
     }
 
     //Get CaseSummaryCaseReport only Province BySpecify name (use format ProvinceEn)  => using query parameter (name)
-    @GetMapping(path = "/cases/sums/province", produces = "application/json", params = "name")
-    public Map<String, Integer> sumsCaseProvinceByName (@RequestParam("name") String name) {
-        Map<String, Integer> data = new HashMap<>();
+    @GetMapping(path = "/cases/sums/province/select", produces = "application/json", params = "name")
+    public Map sumsCaseProvinceByName (@RequestParam("name") String name) {
+        Map data = new HashMap<>();
         //map return value for know data meaning
         data.put(name, caseSummaryService.getCaseSummaryProvinceByName(name));
+        data.put("UpdateDate",caseSummaryService.getCaseSummaryReport().getUpdateDate());
         return data;
     }
 
